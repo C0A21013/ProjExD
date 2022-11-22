@@ -35,7 +35,7 @@ def kaitou(abs_chars):
         for i in range(num):
             ans = input(f"{i + 1}つ目の文字を入力してください：")
             if ans not in abs_chars:
-                print("不正解です。!!!!!")
+                print("不正解です。")
                 return False
             else:
                 abs_chars.remove(ans)
@@ -55,4 +55,4 @@ if __name__ == "__main__":
             print("-"*20)
     
     ed = time.time()
-    print(f"所要時間：{(ed-st):.2f}秒")
+    print(f"所要時間！！：{(ed-st):.2f}秒")
