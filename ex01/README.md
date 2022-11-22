@@ -1,28 +1,12 @@
-import random
-import datetime
-
-def shutudai(qa_lst):
-    qa = random.choice(qa_lst)
-    print("問題:" +qa["q"])
-    return qa["an"]
-
-def kaitou(ans_lst):
-    st = datetime.datetime.now()
-
-    ans = input("答えるんだ：")
-
-    ed = datetime.datetime.now()
-    if ans in ans_lst:
-        print("正解！！！")
-    else:
-        print("出直してこい")
-    
-    #print(f"回答時間：" +{(ed-st).seconds}秒")
-
-if __name__ == "__main__":
-    qa_lst = [{"q" : "サザエの旦那の名前は？","an" : ["マスオ","ますお"]},
-            {"q" : "カツオの妹の名前は？","an" : ["ワカメ","わかめ"]},
-            {"q" : "タラオはカツオから見てどんな関係？","an" : ["甥","おい","甥っ子","おいっこ"]}]
-
-ans_lst = shutudai(qa_lst)
-kaitou(ans_lst)
+# 第1回
+## サザエさんクイズ（ex01/quiz.py）
+### 遊び方
+* コマンドラインでquiz.pyを実行すると，標準出力に問題が表示される．
+* 標準入力から答えを入力する．
+* 正解なら「正解！！！」と表示される．
+* 不正解なら「出直してこい」と表示される．
+* 正解でも不正解でも，1問䛾み出題される．
+### プログラム内䛾解説
+* main関数：クイズプログラム䛾全体䛾流れを担当する．
+* shutudai関数：ランダムに選んだ問題を出題し，解答をmain関数に返す．
+* kaitou関数：回答と正解をチェックし，結果を出力する
