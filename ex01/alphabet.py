@@ -35,7 +35,7 @@ def kaitou(abs_chars):
         for i in range(num):
             ans = input(f"{i + 1}つ目の文字を入力してください：")
             if ans not in abs_chars:
-                print("不正解です。")
+                print("不正解です。!!!!!")
                 return False
             else:
                 abs_chars.remove(ans)
