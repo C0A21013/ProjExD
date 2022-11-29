@@ -18,7 +18,7 @@ def button_click(event):
 
 
 root = tk.Tk()
-root.geometry("300x700")
+root.geometry("300x630")
 
 entry = tk.Entry(root, justify="right", width=10, font=("",40))
 entry.grid(row = 0, column=0, columnspan=3) 
