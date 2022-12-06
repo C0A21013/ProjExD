@@ -5,11 +5,9 @@ def key_down(event):
     global key
     key = event.keysym
 
-
 def key_up(event):
     global key
     key = ""
-
 
 def main_proc():
     global cx, cy, mx, my,tori,tori2,canvas
@@ -17,17 +15,13 @@ def main_proc():
     if key == "Down": my += 1
     if key == "Left": mx -= 1
     if key == "Right": mx += 1
+
     if maze_lst[mx][my] == 1: # 移動先が壁だったら
         if key == "Up": my += 1
         if key == "Down": my -= 1
         if key == "Left": mx += 1
         if key == "Right": mx -= 1
-        canvas.create_image(cx, cy, image=tori2, tag="kokaton") 
-
-
-
-        
-    
+        canvas.create_image(cx, cy, image=tori2, tag="kokaton") #壁にぶつかった時に画像が変わる
 
     cx, cy = mx*100+50, my*100+50
     canvas.coords("kokaton", cx, cy)
@@ -36,7 +30,7 @@ def main_proc():
 
 if __name__ == "__main__":
     root = tk.Tk()
-    tori2 = tk.PhotoImage(file="fig/8.png")
+    tori2 = tk.PhotoImage(file="fig/8.png") #変更する画像 
 
     root.title("迷えるこうかとん")
     canvas = tk.Canvas(root, width=1500, height=900, bg="black")
