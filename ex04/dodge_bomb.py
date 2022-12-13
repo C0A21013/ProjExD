@@ -15,7 +15,7 @@ def check_bound(obj_rct, scr_rct):
         tate = -1
     return yoko, tate
 
-def check_bound2(obj_rct, scr_rct):
+def check_bound2(obj_rct, scr_rct): #２個目の爆弾
     yoko2, tate2 = +1, +1
     if obj_rct.left < scr_rct.left or scr_rct.right < obj_rct.right:
         yoko2 = -1.5
@@ -23,7 +23,7 @@ def check_bound2(obj_rct, scr_rct):
         tate2 = -1.5
     return yoko2, tate2
 
-def gameover(scrn_sfc):
+def gameover(scrn_sfc): #ゲームオーバーという文字を表示
     font1 = pg.font.SysFont("hg正楷書体pro", 150)
     text1 = font1.render("ゲームオーバー", True, (255,0,0))
                         
@@ -60,7 +60,8 @@ def main():
     scrn_sfc.blit(bomb_sfc, bomb_rct) 
     vx, vy = +1, +1
 
-    bomb2_sfc = pg.Surface((20, 20)) # 正方形の空のSurface
+    #2つ目の爆弾の設定
+    bomb2_sfc = pg.Surface((20, 20)) 
     bomb2_sfc.set_colorkey((0, 0, 0))
     pg.draw.circle(bomb2_sfc, (50, 205, 50), (10, 10), 10)
     bomb2_rct = bomb2_sfc.get_rect()
@@ -105,7 +106,7 @@ def main():
         vy *= tate
 
         if tori_rct.colliderect(bomb_rct):
-            gameover(scrn_sfc)
+            gameover(scrn_sfc) #ゲームオーバーという文字を表示する
             return
 
         bomb2_rct.move_ip(vx2, vy2)
@@ -115,7 +116,7 @@ def main():
         vy2 *= tate2
         
         if tori_rct.colliderect(bomb2_rct):
-            gameover(scrn_sfc)
+            gameover(scrn_sfc) #ゲームオーバーという文字を表示する
             return
         
         pg.display.update()
