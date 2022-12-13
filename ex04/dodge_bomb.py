@@ -1,6 +1,7 @@
 import pygame as pg
 import random
 import sys
+import time
 
 
 def check_bound(obj_rct, scr_rct):
@@ -13,6 +14,24 @@ def check_bound(obj_rct, scr_rct):
     if obj_rct.top < scr_rct.top or scr_rct.bottom < obj_rct.bottom:
         tate = -1
     return yoko, tate
+
+def check_bound2(obj_rct, scr_rct):
+    yoko2, tate2 = +1, +1
+    if obj_rct.left < scr_rct.left or scr_rct.right < obj_rct.right:
+        yoko2 = -1.5
+    if obj_rct.top < scr_rct.top or scr_rct.bottom < obj_rct.bottom:
+        tate2 = -1.5
+    return yoko2, tate2
+
+def gameover(scrn_sfc):
+    font1 = pg.font.SysFont("hg正楷書体pro", 150)
+    text1 = font1.render("ゲームオーバー", True, (255,0,0))
+                        
+    scrn_sfc.fill((0,0,0))  #画面を黒で塗りつぶす
+    scrn_sfc.blit(text1, (350,300))
+
+    pg.display.update() #描画処理を実行
+    time.sleep(3)
 
 
 def main():
@@ -41,7 +60,15 @@ def main():
     scrn_sfc.blit(bomb_sfc, bomb_rct) 
     vx, vy = +1, +1
 
-    
+    bomb2_sfc = pg.Surface((20, 20)) # 正方形の空のSurface
+    bomb2_sfc.set_colorkey((0, 0, 0))
+    pg.draw.circle(bomb2_sfc, (50, 205, 50), (10, 10), 10)
+    bomb2_rct = bomb2_sfc.get_rect()
+    bomb2_rct.centerx = random.randint(0, scrn_rct.width)
+    bomb2_rct.centery = random.randint(0, scrn_rct.height)
+    scrn_sfc.blit(bomb2_sfc, bomb2_rct) 
+    vx2, vy2 = +1, +1
+
     while True:
         scrn_sfc.blit(pgbg_sfc, pgbg_rct) 
 
@@ -58,6 +85,7 @@ def main():
             tori_rct.centerx -= 1
         if key_dct[pg.K_RIGHT]:
             tori_rct.centerx += 1
+
         if check_bound(tori_rct, scrn_rct) != (+1, +1):
             # どこかしらはみ出ていたら
             if key_dct[pg.K_UP]:
@@ -70,7 +98,6 @@ def main():
                 tori_rct.centerx -= 1            
         scrn_sfc.blit(tori_sfc, tori_rct) 
 
-        
         bomb_rct.move_ip(vx, vy)
         scrn_sfc.blit(bomb_sfc, bomb_rct) 
         yoko, tate = check_bound(bomb_rct, scrn_rct)
@@ -78,6 +105,17 @@ def main():
         vy *= tate
 
         if tori_rct.colliderect(bomb_rct):
+            gameover(scrn_sfc)
+            return
+
+        bomb2_rct.move_ip(vx2, vy2)
+        scrn_sfc.blit(bomb2_sfc, bomb2_rct) 
+        yoko2, tate2 = check_bound2(bomb2_rct, scrn_rct)        
+        vx2 *= yoko2
+        vy2 *= tate2
+        
+        if tori_rct.colliderect(bomb2_rct):
+            gameover(scrn_sfc)
             return
         
         pg.display.update()
