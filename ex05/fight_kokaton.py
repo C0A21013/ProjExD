@@ -90,7 +90,8 @@ def main():
     kkt = Bird("fig/6.png", 2.0, (900,400))
     kkt.update(scr)
     
-    ks_ls = []
+    #追加機能
+    ks_ls = []  #リスト
     bob = 3
     for _ in range(bob):
         sp = 1
